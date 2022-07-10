@@ -1,0 +1,29 @@
+In MainMenuState.hx search that:
+
+var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
+        var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+        bg.scrollFactor.set(0, yScroll);
+        bg.setGraphicSize(Std.int(bg.width * 1.175));
+        bg.updateHitbox();
+        bg.screenCenter();
+        bg.antialiasing = ClientPrefs.globalAntialiasing;
+        add(bg);
+
+And Replace with that
+
+var bg = new FlxSprite();
+bg.frames = Paths.getSparrowAtlas('yourBackground');
+bg.animation.addByPrefix('idle', 'yourXMLprefix', 24); // 24 is the fps of the anim, change if needed
+bg.animation.play('idle');
+bg.antialiasing = ClientPrefs.globalAntialiasing;
+bg.scrollFactor.set();
+bg.screenCenter();
+add(bg);
+
+and
+
+var menutext:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menutext'));
+menutext.scrollFactor.set(0, 0);
+menutext.screenCenter();
+menutext.updateHitbox();
+add(menutext);
